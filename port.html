@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>K Nagaraj · Machine Learning Engineer</title>
+  <!-- Font Awesome 6 (free) for icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: #f8fafc;
+      font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      line-height: 1.6;
+      color: #0b2b3c;
+      padding: 1.5rem;
+    }
+
+    /* fallback Inter via system fonts */
+    h1, h2, h3, .nav-links a {
+      font-weight: 600;
+      letter-spacing: -0.02em;
+    }
+
+    .container {
+      max-width: 1280px;
+      margin: 0 auto;
+      background: white;
+      border-radius: 2rem;
+      box-shadow: 0 20px 40px -12px rgba(0,20,30,0.15);
+      overflow: hidden;
+    }
+
+    /* header / nav */
+    .top-bar {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.5rem 2.5rem;
+      background: white;
+      border-bottom: 1px solid #e2edf2;
+    }
+
+    .logo {
+      font-size: 1.7rem;
+      font-weight: 700;
+      background: linear-gradient(145deg, #0e4b5e, #1b7b8e);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      font-size: 1.1rem;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: #1e4a5f;
+      transition: color 0.15s;
+      font-weight: 500;
+    }
+
+    .nav-links a:hover {
+      color: #0fa3be;
+    }
+
+    /* hero */
+    .hero {
+      padding: 3rem 2.5rem 2rem 2.5rem;
+      background: #ffffff;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 2.5rem;
+    }
+
+    .hero-content {
+      flex: 2 1 300px;
+    }
+
+    .hero-content .badge {
+      background: #d3edf2;
+      color: #0c5062;
+      padding: 0.35rem 1rem;
+      border-radius: 40px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      display: inline-block;
+      margin-bottom: 1rem;
+      letter-spacing: 0.3px;
+    }
+
+    .hero-content h1 {
+      font-size: 3.2rem;
+      line-height: 1.2;
+      margin-bottom: 1.2rem;
+      color: #0b3440;
+    }
+
+    .hero-highlight {
+      color: #1d7e92;
+      border-bottom: 3px solid rgba(23, 141, 165, 0.25);
+    }
+
+    .hero-para {
+      font-size: 1.25rem;
+      color: #254f5c;
+      max-width: 600px;
+      margin-bottom: 2rem;
+    }
+
+    .cta-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      align-items: center;
+    }
+
+    .btn-primary {
+      background: #136c7e;
+      border: none;
+      padding: 0.9rem 2.2rem;
+      border-radius: 60px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: white;
+      cursor: pointer;
+      transition: background 0.15s, transform 0.1s;
+      box-shadow: 0 4px 10px rgba(17, 107, 128, 0.3);
+      border: 1px solid #127484;
+    }
+
+    .btn-primary:hover {
+      background: #0b596b;
+      transform: scale(1.02);
+    }
+
+    .btn-outline {
+      background: transparent;
+      border: 1.5px solid #bcdae2;
+      padding: 0.85rem 2rem;
+      border-radius: 60px;
+      font-size: 1.1rem;
+      font-weight: 500;
+      color: #136675;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: background 0.2s;
+      text-decoration: none;
+    }
+
+    .btn-outline:hover {
+      background: #e3f2f6;
+    }
+
+    .hero-avatar {
+      flex: 1 1 200px;
+      display: flex;
+      justify-content: center;
+    }
+
+    .avatar-box {
+      background: #d2eaf0;
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(145deg, #b9dfe9, #8fcbd9);
+      box-shadow: 0 12px 24px -8px rgba(33, 128, 148, 0.4);
+    }
+
+    .avatar-box i {
+      font-size: 7rem;
+      color: #175a69;
+      text-shadow: 2px 4px 6px rgba(255,255,255,0.5);
+    }
+
+    /* section generic */
+    .section {
+      padding: 2.5rem;
+      border-top: 1px solid #deedf2;
+    }
+
+    .section-title {
+      font-size: 2rem;
+      margin-bottom: 2rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      color: #0f4453;
+    }
+
+    .section-title i {
+      color: #248196;
+      font-size: 2rem;
+    }
+
+    /* expertise chips */
+    .expertise-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.8rem 1.2rem;
+      margin-bottom: 2rem;
+    }
+
+    .chip {
+      background: #ebf6f9;
+      color: #115b6d;
+      padding: 0.6rem 1.5rem;
+      border-radius: 60px;
+      font-size: 1.1rem;
+      font-weight: 500;
+      border: 1px solid #bde0e9;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+      transition: all 0.1s;
+    }
+
+    .chip:hover {
+      background: #d2eef6;
+      border-color: #6eb7cc;
+    }
+
+    /* projects cards - responsive grid */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+      margin-top: 1.5rem;
+    }
+
+    .project-card {
+      background: #f7fbfd;
+      border-radius: 1.8rem;
+      padding: 1.8rem 1.8rem 2rem 1.8rem;
+      transition: 0.15s ease;
+      border: 1px solid #d6eaf0;
+      box-shadow: 0 10px 18px -12px #9bc6d4;
+    }
+
+    .project-card:hover {
+      background: white;
+      border-color: #aad0dd;
+      transform: translateY(-5px);
+      box-shadow: 0 24px 30px -16px #6eafc2;
+    }
+
+    .project-icon {
+      font-size: 2.4rem;
+      color: #1f7e93;
+      margin-bottom: 1.2rem;
+    }
+
+    .project-card h3 {
+      font-size: 1.7rem;
+      margin-bottom: 0.5rem;
+      color: #0e4251;
+    }
+
+    .project-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin: 1rem 0 1.2rem;
+    }
+
+    .project-tags span {
+      background: #daf0f5;
+      padding: 0.2rem 1rem;
+      border-radius: 60px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: #0a5265;
+    }
+
+    .project-card p {
+      color: #214f5c;
+      margin-bottom: 1.5rem;
+    }
+
+    .card-link {
+      text-decoration: none;
+      font-weight: 600;
+      color: #116c81;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      border-bottom: 2px solid transparent;
+      transition: border 0.1s;
+    }
+
+    .card-link:hover {
+      border-bottom: 2px solid #1e849b;
+    }
+
+    /* experience list */
+    .exp-item {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+      padding-bottom: 1.5rem;
+      border-bottom: 1px dashed #c2dde7;
+    }
+
+    .exp-year {
+      min-width: 100px;
+      font-weight: 700;
+      color: #0c6073;
+      font-size: 1.25rem;
+    }
+
+    .exp-desc {
+      flex: 1;
+    }
+
+    .exp-desc h3 {
+      font-size: 1.5rem;
+      color: #133e4a;
+      margin-bottom: 0.3rem;
+    }
+
+    .exp-desc .company {
+      font-weight: 500;
+      color: #368196;
+      margin-bottom: 0.75rem;
+      display: block;
+    }
+
+    .exp-desc ul {
+      list-style: none;
+    }
+
+    .exp-desc li {
+      margin-bottom: 0.4rem;
+      display: flex;
+      gap: 0.7rem;
+      align-items: baseline;
+    }
+
+    .exp-desc li i {
+      color: #127e93;
+      font-size: 0.8rem;
+      margin-top: 0.45rem;
+      width: 1rem;
+    }
+
+    /* contact & footer */
+    .contact-flex {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2.5rem;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .contact-icons {
+      display: flex;
+      gap: 2rem;
+    }
+
+    .contact-icons a {
+      color: #1d4f5e;
+      font-size: 1.9rem;
+      transition: 0.1s;
+    }
+
+    .contact-icons a:hover {
+      color: #0d93af;
+      transform: scale(1.1);
+    }
+
+    .footer-note {
+      font-size: 1rem;
+      color: #427482;
+      border-top: 1px solid #cde2e9;
+      margin-top: 2rem;
+      padding-top: 1.8rem;
+      text-align: center;
+    }
+
+    /* responsiveness fine-tune */
+    @media (max-width: 650px) {
+      .top-bar {
+        flex-direction: column;
+        gap: 1rem;
+        padding: 1.2rem 1.5rem;
+      }
+      .hero {
+        padding: 2rem 1.5rem;
+      }
+      .hero-content h1 {
+        font-size: 2.6rem;
+      }
+      .avatar-box {
+        width: 150px;
+        height: 150px;
+      }
+      .avatar-box i {
+        font-size: 5rem;
+      }
+      .section {
+        padding: 2rem 1.5rem;
+      }
+      .exp-item {
+        flex-direction: column;
+        gap: 0.5rem;
+      }
+      .contact-flex {
+        flex-direction: column;
+        align-items: start;
+      }
+    }
+
+    @media (max-width: 380px) {
+      .hero-content h1 {
+        font-size: 2rem;
+      }
+    }
+
+    /* decorative */
+    .highlight-bg {
+      background: #e3f0f5;
+    }
+    .print-resume-note {
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+
+  <!-- header / navigation -->
+  <div class="top-bar">
+    <span class="logo"><i class="fas fa-brain" style="margin-right: 8px; color: #157e94;"></i> K Nagaraj</span>
+    <div class="nav-links">
+      <a href="#">Work</a>
+      <a href="#">Projects</a>
+      <a href="#">Resume</a>
+      <a href="#">Contact</a>
+    </div>
+  </div>
+
+  <!-- hero -->
+  <div class="hero">
+    <div class="hero-content">
+      <span class="badge"><i class="fas fa-robot" style="margin-right: 5px;"></i> Machine Learning Engineer</span>
+      <h1>Crafting intelligence <br><span class="hero-highlight">from data to deployment</span></h1>
+      <p class="hero-para">Design, build, and scale ML systems that solve real-world problems. 5+ years in computer vision, LLMs, and MLOps.</p>
+      <div class="cta-group">
+        <button class="btn-primary"><i class="fas fa-paper-plane" style="margin-right: 8px;"></i>Contact me</button>
+        <a href="#" class="btn-outline"><i class="fas fa-file-pdf"></i> Resume</a>
+      </div>
+    </div>
+    <div class="hero-avatar">
+      <div class="avatar-box">
+        <i class="fas fa-user-astronaut"></i>
+      </div>
+    </div>
+  </div>
+
+  <!-- core expertise / keywords -->
+  <div class="section" style="padding-top: 0.5rem; border-top: none;">
+    <div class="expertise-grid">
+      <span class="chip"><i class="fas fa-eye" style="margin-right: 6px;"></i> Computer Vision</span>
+      <span class="chip"><i class="fas fa-language"></i> NLP & LLMs</span>
+      <span class="chip"><i class="fas fa-chart-line"></i> Time Series</span>
+      <span class="chip"><i class="fas fa-cloud"></i> MLOps (Kubeflow, TFX)</span>
+      <span class="chip"><i class="fas fa-code-branch"></i> PyTorch / TensorFlow</span>
+      <span class="chip"><i class="fas fa-database"></i> Data pipelines</span>
+      <span class="chip"><i class="fas fa-aws"></i> AWS SageMaker</span>
+      <span class="chip"><i class="fas fa-brain"></i> Generative AI</span>
+    </div>
+  </div>
+
+  <!-- projects section (selected work) -->
+  <div class="section">
+    <div class="section-title">
+      <i class="fas fa-code"></i> 
+      <span>Selected projects</span>
+    </div>
+    <div class="projects-grid">
+      <!-- card 1 -->
+      <div class="project-card">
+        <div class="project-icon"><i class="fas fa-camera-retro"></i></div>
+        <h3>DefectScope</h3>
+        <div class="project-tags">
+          <span>ViT</span>
+          <span>PyTorch</span>
+          <span>ONNX</span>
+        </div>
+        <p>Vision transformer for industrial anomaly detection – 99.2% accuracy on MVTec AD. Deployed at the edge with TensorRT.</p>
+        <a href="#" class="card-link">case study <i class="fas fa-arrow-right"></i></a>
+      </div>
+      <!-- card 2 -->
+      <div class="project-card">
+        <div class="project-icon"><i class="fas fa-comment-dots"></i></div>
+        <h3>SummaRise</h3>
+        <div class="project-tags">
+          <span>LLaMA</span>
+          <span>LoRA</span>
+          <span>HuggingFace</span>
+        </div>
+        <p>Fine-tuned 7B parameter model for abstractive meeting summarization. 40% faster inference via 4‑bit quantization.</p>
+        <a href="#" class="card-link">live demo <i class="fas fa-arrow-right"></i></a>
+      </div>
+      <!-- card 3 -->
+      <div class="project-card">
+        <div class="project-icon"><i class="fas fa-chart-pie"></i></div>
+        <h3>DemandLens</h3>
+        <div class="project-tags">
+          <span>Prophet</span>
+          <span>LSTM</span>
+          <span>Kubeflow</span>
+        </div>
+        <p>Hybrid forecasting pipeline for retail demand, reducing stockouts by 22% across 150 stores. Automated retraining.</p>
+        <a href="#" class="card-link">metrics <i class="fas fa-arrow-right"></i></a>
+      </div>
+    </div>
+  </div>
+
+  <!-- experience & impact -->
+  <div class="section">
+    <div class="section-title">
+      <i class="fas fa-briefcase"></i>
+      <span>industry experience</span>
+    </div>
+
+    <div class="exp-item">
+      <div class="exp-year">2022 – present</div>
+      <div class="exp-desc">
+        <h3>Senior ML Engineer</h3>
+        <span class="company">Nexus AI · (San Francisco, CA)</span>
+        <ul>
+          <li><i class="fas fa-caret-right"></i> Lead development of real‑time object tracking for autonomous retail checkout – 97% precision.</li>
+          <li><i class="fas fa-caret-right"></i> Built scalable feature store (Feast) and model registry, reducing duplication by 30%.</li>
+          <li><i class="fas fa-caret-right"></i> Mentor 3 junior engineers; responsible for production model monitoring.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="exp-item">
+      <div class="exp-year">2019 – 2022</div>
+      <div class="exp-desc">
+        <h3>Machine Learning Engineer</h3>
+        <span class="company">Helix Diagnostics · (Boston, MA)</span>
+        <ul>
+          <li><i class="fas fa-caret-right"></i> Designed 3D CNN for MRI segmentation (brain tumors) – Dice score 0.89.</li>
+          <li><i class="fas fa-caret-right"></i> Containerized inference pipeline with Docker + FastAPI, served 500+ daily requests.</li>
+          <li><i class="fas fa-caret-right"></i> Optimized pre-processing with DALI, 2.5x throughput improvement.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="exp-item" style="border-bottom: none; margin-bottom: 0; padding-bottom: 0;">
+      <div class="exp-year">2018 – 2019</div>
+      <div class="exp-desc">
+        <h3>Data Scientist (ML focus)</h3>
+        <span class="company">Finlytics · (New York, NY)</span>
+        <ul>
+          <li><i class="fas fa-caret-right"></i> Developed credit risk models using XGBoost and SHAP explanations; improved AUC by 5%.</li>
+          <li><i class="fas fa-caret-right"></i> Automated ETL and feature engineering pipelines (Airflow).</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- contact / responsible footer -->
+  <div class="section" style="background: #ecf6fa;">
+    <div class="contact-flex">
+      <div style="flex: 1;">
+        <h2 style="font-size: 1.9rem; color: #0b4d5e; margin-bottom: 0.5rem;">Build responsible AI<span style="color: #1b859b;">.</span></h2>
+        <p style="font-size: 1.1rem; color: #205c6b; max-width: 450px;">Fairness, explainability, and robustness built into every model. Let’s connect.</p>
+      </div>
+      <div class="contact-icons">
+        <a href="#" aria-label="GitHub"><i class="fab fa-github"></i></a>
+        <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+        <a href="#" aria-label="X / Twitter"><i class="fab fa-x-twitter"></i></a>
+        <a href="#" aria-label="Email"><i class="fas fa-envelope"></i></a>
+      </div>
+    </div>
+    <div class="footer-note">
+      <i class="fas fa-shield-alt" style="margin-right: 6px; color: #1d7a8f;"></i>  responsible by design · all projects follow ethical AI guidelines · available for collaborations
+    </div>
+  </div>
+</div>
+
+<!-- small footnote: 1-page fully responsive portfolio -->
+<div style="text-align: center; margin-top: 1.2rem; color: #54828f; font-size: 0.9rem;">
+  <i class="fas fa-mobile-alt"></i> responsive ML engineer portfolio · <span id="year"></span>
+</div>
+
+<script>
+  document.getElementById('year').innerText = new Date().getFullYear();
+</script>
+</body>
+</html>
